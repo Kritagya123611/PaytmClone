@@ -1,0 +1,122 @@
+/* Global Styling */
+body, html {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #121212, #1e1e1e);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Centering */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 15px;
+}
+
+/* Heading Styling */
+.heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    transition: all 0.3s ease-in-out;
+}
+.heading:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Subheading */
+.subheading {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #b0b0b0;
+    text-align: center;
+    margin-top: 20px;
+    transition: color 0.3s ease-in-out;
+}
+.subheading:hover {
+    color: #ffffff;
+}
+
+/* Form Styling */
+.loginform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 350px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.loginform:hover {
+    transform: translateY(-5px);
+}
+
+/* Input Fields */
+.loginform input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.loginform input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+.loginform input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+/* Button Styling */
+.loginform button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: rgb(80, 171, 80);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.loginform button:hover {
+    background: rgb(60, 150, 60);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .heading {
+        font-size: 2rem;
+    }
+    .subheading {
+        font-size: 1rem;
+    }
+    .loginform {
+        max-width: 280px;
+    }
+}

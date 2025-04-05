@@ -1,0 +1,91 @@
+/* Full-Screen Styling */
+body, html {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #121212, #1e1e1e);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for Heading & Buttons */
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 40px;
+}
+
+/* Heading Styling */
+.heading {
+    color: aliceblue;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    opacity: 0.9;
+    transition: all 0.3s ease-in-out;
+}
+.heading:hover {
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+/* Buttons Section */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Button Styling */
+.login, .register {
+    background-color: rgb(80, 171, 80);
+    border: none;
+    border-radius: 12px;
+    height: 50px;
+    width: 180px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(80, 171, 80, 0.3);
+}
+
+/* Hover Effect */
+.login:hover, .register:hover {
+    transform: scale(1.05); 
+    background-color: rgb(60, 151, 60);
+    box-shadow: 0px 6px 20px rgba(80, 171, 80, 0.5);
+}
+
+/* Click Effect */
+.login:active, .register:active {
+    transform: scale(0.95); 
+    box-shadow: 0px 3px 10px rgba(80, 171, 80, 0.5);
+}
+
+/* Focus Effect */
+.login:focus, .register:focus {
+    outline: none; 
+    box-shadow: 0px 0px 8px rgba(80, 171, 80, 0.8); 
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .heading {
+        font-size: 2rem;
+    }
+    .buttons {
+        gap: 15px;
+    }
+    .login, .register {
+        width: 160px;
+        font-size: 1rem;
+    }
+}
