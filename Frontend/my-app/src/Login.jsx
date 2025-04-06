@@ -24,6 +24,9 @@ export function Login(){
             toast.success(data.message||"Login successful");
             localStorage.setItem("name",data.name);
             localStorage.setItem("email",data.email);
+            localStorage.setItem("phone",data.phone);
+            localStorage.setItem("aadhaar",data.aadhaar);
+            localStorage.setItem("balance",data.balance);
             navigate("/dashboard");
         }else{
             toast.error(data.alert||"Login failed");

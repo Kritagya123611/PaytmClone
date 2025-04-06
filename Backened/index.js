@@ -42,11 +42,13 @@ const userSchema=z.object({
     aadhaar:z.number()
 });
 
-const transactionSchema=z.object({
-    senderEmail:z.string().email(),
-    receiverEmail:z.string().email(),
-    amount:z.number().positive()
-})
+const transactionSchema = z.object({
+    senderEmail: z.string().email(),
+    receiverEmail: z.string().email(),
+    amount: z.union([z.number(), z.string().refine(val => !isNaN(val), {
+        message: "Amount must be a number"
+    })])
+});
 
 const loginSchema=z.object({
     email:z.string().email(),
@@ -75,7 +77,13 @@ app.post("/register",async(req,res)=>{
                 aadhaar
             })
             await newUser.save();
-            res.status(201).json({message:"User registered successfully"});
+            res.status(201).json({message:"User registered successfully",
+                name:newUser.name,
+                email:newUser.email,
+                phone:newUser.phone,
+                aadhaar:newUser.aadhaar,
+                balance:newUser.balance
+            });
             }
         }
     }
@@ -94,9 +102,16 @@ app.post("/Login",async(req,res)=>{
     if(existingUser.password!==password){
         return res.status(400).json({alert:"Incorrect password"});
     }
+    if(existingUser.balance===0){
+        existingUser.balance=5000;
+        await existingUser.save();
+    }
     res.status(200).json({message:"Login successful",
         name:existingUser.name,
-        email:existingUser.email
+        email:existingUser.email,
+        phone:existingUser.phone,
+        aadhaar:existingUser.aadhaar,
+        balance:existingUser.balance
     });
 })
 
@@ -112,11 +127,16 @@ app.post("/transaction",async(req,res)=>{
             return res.status(400).json({alert:"User not found"});
         }
         else{
-            if(sender.balance<amount){
-                return res.status(400).json({alert:"Insufficient balance"});
-            }else{
-                sender.balance=sender.balance-amount;
-                receiver.balance=receiver.balance+amount;
+            const amt = Number(amount);
+        if (isNaN(amt)) {
+            return res.status(400).json({ alert: "Invalid amount" });
+        }
+
+        if (sender.balance < amt) {
+            return res.status(400).json({ alert: "Insufficient balance" });
+        } else {
+            sender.balance = sender.balance - amt;
+            receiver.balance = receiver.balance + amt;
                 await sender.save();
                 await receiver.save();
                 const newTransaction=new Transaction({
@@ -131,6 +151,18 @@ app.post("/transaction",async(req,res)=>{
         }
     }
 });
+
+app.post("/resetBalance",async(req,res)=>{
+    const {email}=req.body;
+    const user=await data.findOne({email});
+    if(!user){
+        return res.status(400).json({alert:"User not found"});
+    }else{
+        user.balance=5000;
+        await user.save();
+        res.status(200).json({message:"Balance reset successfully"});
+    }
+})
 
 app.get("/transactionHistory/:email",async(req,res)=>{
     const transactions=await Transaction.find({

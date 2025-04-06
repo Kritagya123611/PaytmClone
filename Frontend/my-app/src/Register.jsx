@@ -2,9 +2,11 @@ import React from "react";
 import './Register.css';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 export function Register(){
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -29,7 +31,12 @@ export function Register(){
         const data=await response.json();
         if(response.status===201){
             toast.success(data.message||"Registration successful");
-            Navigate("/Dashboard");
+            localStorage.setItem("name",data.name);
+            localStorage.setItem("email",data.email);
+            localStorage.setItem("phone",data.phone);
+            localStorage.setItem("aadhaar",data.aadhaar);
+            localStorage.setItem("balance",data.balance);
+            navigate("/dashboard");
         }else{
             toast.error(data.alert||"Registration failed");
         }
