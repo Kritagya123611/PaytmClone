@@ -1,16 +1,3 @@
-/* Full-Screen Styling */
-body, html {
-    height: 100%;
-    margin: 0;
-    background: linear-gradient(135deg, #121212, #1e1e1e);
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Container for Heading & Buttons */
 .container {
     text-align: center;
     display: flex;
